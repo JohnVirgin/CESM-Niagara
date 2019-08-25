@@ -1,5 +1,5 @@
 # CESM-Builds
- Source Code and Use Instructions for CESM on Scinet's Niagara, as well as macOS for the bold and brave souls looking to run the single column version of the model (SCAM)- CFG Edition
+ Source Code and Use Instructions for CESM on Scinet's Niagara, as well as macOS for the bold and brave souls looking to run the single column version of the model (SCAM)- CFG Edition brought to you by Jack, with some help from Haruki over at U of T
 
 # Source Code and Picking a Particular Version
 I'm just going to be discussing running/modifying the model version that's already sitting in my home directory, as it's been modified accordingly for Niagara specifically. However, I'll also throw in some comments on acquiring your own model version, with some helpful links and slides. Eventually, I'll get the single column model up and running on my mac and i'll add all of that data and scripts here.
@@ -19,11 +19,17 @@ If permissions aren't allowing you to steal the ```cesm2_1_0``` directory from m
 git clone -b release-cesm2.1.0 https://github.com/ESCOMP/cesm.git
 ```
 
-move into the cesm folder that was just downloaded and run the checkout externals command to get the compoenent specific source code (land, atmosphere, sea ice, ocean, etc):
+move into the cesm folder that was just downloaded and run the checkout externals command to get the component specific source code (land, atmosphere, sea ice, ocean, etc):
 
 ```
 cd cesm
 ./manage_externals/checkout_externals
+```
+
+NOTE: ```./manage_externals/checkout_externals``` will only work if you have the subversion software loaded into your current session. If you have haven't done that prior to downloading, fire this command off:
+
+```
+module load subversion
 ```
 
 Now You've got a full copy of the model (minus the input data, but we'll get to that later). All that's left is to snag the Niagara specific .xml files in this repo and replace the ones sitting in your ```cesm2_1_0``` directory.
