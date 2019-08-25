@@ -62,3 +62,11 @@ Running the model consists of four mandatory steps, with an unlimited number of 
 ```
 
 ### Creating a new case
+
+Pop into ```cesm2_1_0/cime/scripts/``` and you'll see an executable file, ```create_newcase```. Execute this with some parameters so initiate a particular CESM experiment. A few options:
+
+```
+--case
+```
+
+specific the location of where your case will be created. I have two folders for this, one in my home directory and one in my scratch directory. Regardless of where you put it, the xml files we're using are configured to automatically file all compiling, archiving, and setup output into your scratch directory. My advice? Put newly created cases in your scratch directory for now, because submitted batch jobs using SLURM refuse to write into your home directory (i.e. the home directory is read-only from the eyes of a compute node on niagara). Do all your building, compiling, running, and everything else out of scratch. When you're all finished, move the case directory you made back to your home to prevent it from being deleted due to inactivity. 
