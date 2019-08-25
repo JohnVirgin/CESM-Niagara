@@ -6,6 +6,7 @@ I'm just going to be discussing running/modifying the model version that's alrea
 
 ## Pre-configured version from my home directory (CESM2.1.0)
 Log into scinet and pop over to my home directory:
-'''
+
+```
 git clone https://github.com/JohnVirgin/CESM-Builds/Niagara/cesm2_1_0
-'''
+```
