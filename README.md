@@ -69,7 +69,7 @@ Pop into ```cesm2_1_0/cime/scripts/``` and you'll see an executable file, ```cre
 --case
 ```
 
-Specific the location of where your case will be created. I have two folders for this, one in my home directory and one in my scratch directory. Regardless of where you put it, the .xml files we're using are configured to automatically file all compiling, archiving, and setup output into your scratch directory. My advice? Put newly created cases in your scratch directory for now, because submitted batch jobs using SLURM refuse to write into your home directory (i.e. the home directory is read-only from the eyes of a compute node on niagara). You might get some issues if a log file is created during your run and it happens to be sitting in your $HOME.
+Specific location of where your case will be created. I have two folders for this, one in my home directory and one in my scratch directory. Regardless of where you put it, the .xml files we're using are configured to automatically file all compiling, archiving, and setup output into your scratch directory. My advice? Put newly created cases in your scratch directory for now, because submitted batch jobs using SLURM refuse to write into your home directory (i.e. the home directory is read-only from the eyes of a compute node on niagara). You might get some issues if a log file is created during your run and it happens to be sitting in your $HOME.
 
 Do all your building, compiling, running, and everything else out of scratch. When you're all finished, move the case directory you made back to your home to prevent it from being deleted due to inactivity.
 
@@ -89,4 +89,7 @@ Specifies the components going into your build. This option is actually typicall
 --machine
 ```
 
-Pretty straightforward; specifices the machine you're running on so CESM knows where to get its modules, compilers, and figure out what batch system we're working with. For us, this is always ```niagara```.
+Pretty straightforward; specifies the machine you're running on so CESM knows where to get its modules, compilers, and figure out what batch system we're working with. For us, this is always ```niagara```.
+
+### Setup the new case
+Head on into the case directory you just made and take a look at all the goodies in there. The next step (if you want) is to setup your case. Execute this option to set up your run directory (which should be in your $SCRATCH). It will also give you a bunch of user-changeable namelist files, where you can specify modified and new variables that you want the model to output. There's a single namelist file for each model component, and they have naming syntax like ```user_nl_xxx```. Where the `xxx` is replaced with a given model. Lastly, this command also creates hidden files that specify batch information for SLURM. I typically run ```./case.setup``` immediately after I create a new case. You can make your changes to the .xml files we're about to talk about either before or after you run the command. 
