@@ -4,7 +4,7 @@
 # Source Code and Picking a Particular Version
 I'm just going to be discussing running/modifying the model version that's already sitting in my home directory, as it's been modified accordingly for Niagara specifically. However, I'll also throw in some comments on acquiring your own model version, with some helpful links and slides. Eventually, I'll get the single column model up and running on my mac and I'll add all of that data and scripts here.
 
-## Pre-configured version from my home directory (CESM2.1.0)
+### Pre-configured version from my home directory (CESM2.1.0)
 Log into scinet and pop over to my home directory:
 
 ```
@@ -12,7 +12,7 @@ cd /home/c/cgf/jgvirgin
 ```
 You should see a directory labelled ```cesm2_1_0```, which is the version of CESM2 that's configured for use on Niagara. Copy that directory over to your home directory. If you don't have permissions, see the alternative below
 
-## Getting the Source code from NCAR and the Niagara specific configuration files from this github
+### Getting the Source code from NCAR and the Niagara specific configuration files from this github
 If permissions aren't allowing you to steal the ```cesm2_1_0``` directory from my home folder, you can download the model source code from NCAR directly:
 
 ```
@@ -47,5 +47,8 @@ These three .xml files- config_compilers, config_machines, and config_batch- con
 Replace those default files with the ones from this repo, and you should be good to go.
 
 
-## Getting the Source code for the Single Column Atmosphere Model (SCAM) from NCAR and the macOS configuration files from this Github
+### Getting the Source code for the Single Column Atmosphere Model (SCAM) from NCAR and the macOS configuration files from this Github
 To be updated in the future
+
+
+# Running the Model (Quickstart version)
