@@ -63,10 +63,30 @@ Running the model consists of four mandatory steps, with an unlimited number of 
 
 ### Creating a new case
 
-Pop into ```cesm2_1_0/cime/scripts/``` and you'll see an executable file, ```create_newcase```. Execute this with some parameters so initiate a particular CESM experiment. A few options:
+Pop into ```cesm2_1_0/cime/scripts/``` and you'll see an executable file, ```create_newcase```. Execute this with some parameters to initiate a particular CESM experiment. A few mandatory options:
 
 ```
 --case
 ```
 
-specific the location of where your case will be created. I have two folders for this, one in my home directory and one in my scratch directory. Regardless of where you put it, the xml files we're using are configured to automatically file all compiling, archiving, and setup output into your scratch directory. My advice? Put newly created cases in your scratch directory for now, because submitted batch jobs using SLURM refuse to write into your home directory (i.e. the home directory is read-only from the eyes of a compute node on niagara). Do all your building, compiling, running, and everything else out of scratch. When you're all finished, move the case directory you made back to your home to prevent it from being deleted due to inactivity. 
+Specific the location of where your case will be created. I have two folders for this, one in my home directory and one in my scratch directory. Regardless of where you put it, the .xml files we're using are configured to automatically file all compiling, archiving, and setup output into your scratch directory. My advice? Put newly created cases in your scratch directory for now, because submitted batch jobs using SLURM refuse to write into your home directory (i.e. the home directory is read-only from the eyes of a compute node on niagara). You might get some issues if a log file is created during your run and it happens to be sitting in your $HOME.
+
+Do all your building, compiling, running, and everything else out of scratch. When you're all finished, move the case directory you made back to your home to prevent it from being deleted due to inactivity.
+
+```
+--res
+```
+
+Specifies the resolution of the components being used in your build. What goes into this command depends on what component set you're picking. You can find a list of supported grids for CESM here: http://www.cesm.ucar.edu/models/cesm1.0/cesm/cesm_doc_1_0_4/a3714.html (I know, it's CESM1, but the majority of these are the same for CESM2).
+
+```
+--compset
+```
+
+Specifies the components going into your build. This option is actually typically used as a shortcut. Compsets that are more common have 'short names' that'll save you from typing out which specific CAM, CLM, POP, etc models you'd like to include here. You can find a list of supported CESM2 compsets here: http://www.cesm.ucar.edu/models/cesm2/cesm/compsets.html. One of the caveats of using CESM2 is that there isn't actually that many scientifically validated compsets that exist yet. The lack of testing can sometimes result in linux throwing you an error, because it won't allow you to create a case that hasn't been validated. Get around this by adding ```--run-unsupported``` to the end of the line.
+
+```
+--machine
+```
+
+Pretty straightforward; specifices the machine you're running on so CESM knows where to get its modules, compilers, and figure out what batch system we're working with. For us, this is always ```niagara```.
