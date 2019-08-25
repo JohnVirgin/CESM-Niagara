@@ -52,3 +52,14 @@ To be updated in the future
 
 
 # Running the Model (Quickstart version)
+Running the model consists of four mandatory steps, with an unlimited number of options in between to modify a given case with your own desired specifications. Steps as follows are:
+
+```
+./create_newcase
+./case.setup
+./case.build
+./case.submit
+```
+Build the case (specify component set, resolution of components, machine to be run on, case name, case location)
+Setup the case ()
+### Creating a new case
