@@ -8,5 +8,13 @@ I'm just going to be discussing running/modifying the model version that's alrea
 Log into scinet and pop over to my home directory:
 
 ```
+cd /home/c/cgf/jgvirgin
+```
+You should see a directory labelled ```cesm2_1_0```, which is the version of CESM2 that's configured for use on Niagara. Copy that directory over to your home directory. If you don't have permissions, see the alternative below
+
+## Getting the Source code from NCAR and the Niagara specific configuration files from this github
+
+
+```
 git clone https://github.com/JohnVirgin/CESM-Builds/Niagara/cesm2_1_0
 ```
