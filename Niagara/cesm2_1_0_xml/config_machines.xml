@@ -367,11 +367,11 @@ This allows using a different mpirun command to launch unit tests
          long as the user has write access to this directory.   We recommend that
          all cime model users on a system share an inputdata directory
          as it can be quite large -->
-    <DIN_LOC_ROOT>$ENV{SCRATCH}/cesm2_1_0/inputdata/</DIN_LOC_ROOT>
+    <DIN_LOC_ROOT>/scratch/c/cgf/jgvirgin/cesm2_1_0/inputdata/</DIN_LOC_ROOT>
 
     <!-- DIN_LOC_ROOT_CLMFORC: override of DIN_LOC_ROOT specific to CLM
          forcing data -->
-    <DIN_LOC_ROOT_CLMFORC>$ENV{SCRATCH}/cesm2_1_0/inputdata/atm/datm7/</DIN_LOC_ROOT_CLMFORC>
+    <DIN_LOC_ROOT_CLMFORC>/scratch/c/cgf/jgvirgin/cesm2_1_0/inputdata/atm/datm7/</DIN_LOC_ROOT_CLMFORC>
     <!-- DOUT_S_ROOT: root directory of short term archive files, short term
       archiving moves model output data out of the run directory, but
       keeps it on disk-->
