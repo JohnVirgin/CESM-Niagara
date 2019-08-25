@@ -375,7 +375,7 @@ This allows using a different mpirun command to launch unit tests
     <!-- DOUT_S_ROOT: root directory of short term archive files, short term
       archiving moves model output data out of the run directory, but
       keeps it on disk-->
-    <DOUT_S_ROOT>$CIME_OUTPUT_ROOT/archive/$CASE</DOUT_S_ROOT>
+    <DOUT_S_ROOT>$ENV{SCRATCH}/cesm2_1_0/archive/$CASE</DOUT_S_ROOT>
 
     <!-- BASELINE_ROOT:  Root directory for system test baseline files -->
     <BASELINE_ROOT>$ENV{SCRATCH}/cesm2_1_0/cesm_baselines</BASELINE_ROOT>
@@ -395,7 +395,7 @@ This allows using a different mpirun command to launch unit tests
 
     <!-- SUPPORTED_BY: contact information for support for this system
       this field is not used in code -->
-    <SUPPORTED_BY>no one, but this port was by Haruki</SUPPORTED_BY>
+    <SUPPORTED_BY>jgvirgin@uwaterloo.ca</SUPPORTED_BY>
 
     <!-- MAX_TASKS_PER_NODE: maximum number of threads*tasks per
          shared memory node on this machine,

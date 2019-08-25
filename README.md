@@ -60,6 +60,5 @@ Running the model consists of four mandatory steps, with an unlimited number of 
 ./case.build
 ./case.submit
 ```
-Build the case (specify component set, resolution of components, machine to be run on, case name, case location)
-Setup the case ()
+
 ### Creating a new case
