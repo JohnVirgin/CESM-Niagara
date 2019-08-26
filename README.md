@@ -142,5 +142,5 @@ IMPORTANT NOTE: The other important thing ```./case.submit``` does is checks to 
 
 In the ```config_machines.xml``` file, the input data directory is hard coded to my $SCRATCH (```/scratch/c/cgf/jgvirgin/cesm2_1_0/inputdata/```). I did this so we wouldn't all be downloading input data for similar cases. This makes no difference for when you try to run cases (or at least it shouldn't, but I still need to check permissions), but at least you know where the input data is being downloaded to.
 
-#Adding Output Variables and Changing the Archive Files
+# Adding Output Variables and Changing the Archive Files
 To be updated in the future
