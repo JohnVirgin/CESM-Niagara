@@ -112,7 +112,7 @@ A lot of case-specific changes will be made just before you build your case:
 I won't dive into a lot of these right now, but a few important things to note:
 - A lot of the batch submission, run length, and run options are configured in the .xml files that are sitting in your case directory. Now, you can go into each one and manually change things. But NCAR advises against that because the chance of error goes up. Their work around is to include to executable files to make your life easier- ```./xmlchange``` and ```./xmlquery```.
 - You can ```./xmlquery``` a variable in ANY .xml file in the directory, and it'll return its value/string.
-- You can ```./xmlchange``` any of these variables by specify the name and what you're changing it to.
+- You can ```./xmlchange``` any of these variables by specifying the name and what you're changing it to.
 
 There are a few variables you'll find you'll be changing pretty much any time you run the model, listed below:
 - STOP_OPTION: Indicates timestep for restart files. Alternatively defined, It's the time units of your run length
