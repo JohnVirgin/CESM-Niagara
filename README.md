@@ -118,6 +118,10 @@ There are a few variables you'll find you'll be changing pretty much any time yo
 - STOP_OPTION: Indicates timestep for restart files. Alternatively defined, It's the time units of your run length
   - ```ndays```,```nmonths```,```nyears```.
 - STOP_N: Integer for the number of STOP_OPTION steps to run the model for. Default for this is ```5```, with the default STOP_OPTION is ```ndays```. As such, Running the model from default only takes 5 days.
-  - ```Some Integer````
+  - ```int```
 - JOB_WALLCLOCK_TIME: Indicates how long your run will compute on the nodes you've allocated. The model will default to the max amount of time allowed on Niagara, which is 24 hours. This'll throw you a warning, though. Format for the string is ```Hours:Minutes:Seconds```.
   - ```H:M:S``` (e.g.```5:00:00``` is 5 hours of runtime)
+- RESUBMIT: Sets the number of times to resubmit the run. Since Niagara only allows 24 hours per job, you have to set the model to resubmit and initialize from a restart file whenever the job's allocated time ends.
+  - ```int```
+- CONTINUE_RUN: This is a boolean value that indicates whether or not to continue the run from some initialized case that you never finished. Note that if you start a run from the beginning and set the resubmit to some arbitrary number, ```CONTINUE_RUN``` will automatically swap from ```FALSE``` to ```TRUE``` after the first resubmission.
+    - ```FALSE``` or ```True```
