@@ -127,3 +127,12 @@ There are a few variables you'll find you'll be changing pretty much any time yo
   - ```FALSE``` or ```TRUE```
 - RUN_TYPE: Indicates the type of run being executed. Options reflect running from scratch and running from some reference point. The differences and guides for each of these run types can be found in the Basic_Mods slide deck in the NCAR tutorial.
   - ```startup```, ```hybrid```, and ```branch```
+
+There's a laundry list more, but that's all for now. One other thing to note: The default model output is set to spit out monthly data, so if you run a case from the default configuration (5 days), it won't give you any model output. If you want it to give you daily data, you need to do this on a per variable basis through the namelist files.
+
+Okay, time to hit ```./case.build``` !
+
+This will take a little while to compile the model. You can see the time elapse for each component as it builds.
+
+
+### Submitting the new case
