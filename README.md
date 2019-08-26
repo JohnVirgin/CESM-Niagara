@@ -102,4 +102,7 @@ The nomenclature I used for the case directory name follows the accepted convent
 Head on into the case directory you just made and take a look at all the goodies in there. The next step (if you want) is to setup your case. Execute this option to set up your run directory (which should be in your $SCRATCH). It will also give you a bunch of user-changeable namelist files, where you can specify the modified and new variables that you want the model to output. There's a single namelist file for each model component, and they have naming syntax like ```user_nl_xxx```. Where the `xxx` is replaced with a given model. Lastly, this command also creates hidden files that specify batch information for SLURM. I typically run ```./case.setup``` immediately after I create a new case. You can make your changes to the .xml files we're about to talk about either before or after you run the command.
 
 ### Build the new case
-Here's we're many of the specific changes you'll want to make are going to need to be made.
+A lot of case-specific changes will be made just before you build your case:
+
+- [ ] All additions to your namelist variables - ```user_nl_$model```, will be made here. I'll include more information on modifying these below, but it's not important for the (not-so) quick start version.
+- [ ] Changes to batch options AND run specific length.
