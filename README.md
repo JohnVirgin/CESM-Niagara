@@ -105,4 +105,10 @@ Head on into the case directory you just made and take a look at all the goodies
 A lot of case-specific changes will be made just before you build your case:
 
 - [ ] All additions to your namelist variables - ```user_nl_$model```, will be made here. I'll include more information on modifying these below, but it's not important for the (not-so) quick start version.
-- [ ] Changes to batch options AND run specific length.
+- [ ] Changes to batch submission options.
+- [ ] Changes to run length and run history time-steps.
+- [ ] Changes to physics, chemistry, and parameterization schemes.
+
+I won't dive into a lot of these right now, but a few important things to note:
+- A lot of the batch submission, run length, and run options are configured in the .xml files that are sitting in your case directory. Now, you can go into each one and manually change things. But NCAR advises against that because the chance of error goes up. There workout around is to include to executable files to make your life easier- ```./xmlchange``` and ```./xmlquery```.
+- 
