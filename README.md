@@ -124,4 +124,6 @@ There are a few variables you'll find you'll be changing pretty much any time yo
 - RESUBMIT: Sets the number of times to resubmit the run. Since Niagara only allows 24 hours per job, you have to set the model to resubmit and initialize from a restart file whenever the job's allocated time ends.
   - ```int```
 - CONTINUE_RUN: This is a boolean value that indicates whether or not to continue the run from some initialized case that you never finished. Note that if you start a run from the beginning and set the resubmit to some arbitrary number, ```CONTINUE_RUN``` will automatically swap from ```FALSE``` to ```TRUE``` after the first resubmission.
-    - ```FALSE``` or ```True```
+  - ```FALSE``` or ```TRUE```
+- RUN_TYPE: Indicates the type of run being executed. Options reflect running from scratch and running from some reference point. The differences and guides for each of these run types can be found in the Basic_Mods slide deck in the NCAR tutorial.
+  - ```startup```, ```hybrid```, and ```branch```
