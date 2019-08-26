@@ -138,6 +138,9 @@ This will take a little while to compile the model. You can see the time elapse 
 ### Submitting the new case
 Once you're ready to submit, you can execute the ```./case.submit``` command, for which it'll give you all the SLURM batch specifics. I'm fairly certain that this executable file is just a wrapper for the hidden file ```.case.run```, which is the actual shell script that submits via slurm. If you want to make changes to the number of nodes you're using or the number of tasks per node, you can do it in here.
 
-IMPORTANT NOTE: The other important things ```./case.submit``` does is checks to see if you have the necessary input data to run your case (forcings, initial conditions, etc.). You'll see it check for this when you run ```./case.submit```, and if you don't have it, it'll download the necessary data from NCAR.
+IMPORTANT NOTE: The other important thing ```./case.submit``` does is checks to see if you have the necessary input data to run your case (forcings, initial conditions, etc.). You'll see it check for this when you run ```./case.submit```, and if you don't have it, it'll download the necessary data from NCAR.
 
 In the ```config_machines.xml``` file, the input data directory is hard coded to my $SCRATCH (```/scratch/c/cgf/jgvirgin/cesm2_1_0/inputdata/```). I did this so we wouldn't all be downloading input data for similar cases. This makes no difference for when you try to run cases (or at least it shouldn't, but I still need to check permissions), but at least you know where the input data is being downloaded to.
+
+#Adding Output Variables and Changing the Archive Files
+To be updated in the future
