@@ -395,7 +395,7 @@ This allows using a different mpirun command to launch unit tests
 
     <!-- SUPPORTED_BY: contact information for support for this system
       this field is not used in code -->
-    <SUPPORTED_BY>jgvirgin@uwaterloo.ca</SUPPORTED_BY>
+    <SUPPORTED_BY>John Virgin - jgvirgin@uwaterloo.ca</SUPPORTED_BY>
 
     <!-- MAX_TASKS_PER_NODE: maximum number of threads*tasks per
          shared memory node on this machine,
