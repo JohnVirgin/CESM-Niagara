@@ -94,7 +94,7 @@ Pretty straightforward; specifies the machine you're running on so CESM knows wh
 Here's a quick example of a test case I setup and ran:
 
 ```
-./create_newcase --case $SCRATCH/CESM_Cases/b.e21.B1850.f19_g17.JGV.TestCase.001 --res f19_g17 --compset B1850 -machine niagara
+./create_newcase --case $SCRATCH/CESM_Cases/b.e21.B1850.f19_g17.JGV.TestCase.001 --res f19_g17 --compset B1850 --machine niagara
 ```
 The nomenclature I used for the case directory name follows the accepted conventions from NCAR's website: http://www.cesm.ucar.edu/models/cesm1.0/casename_conventions_cesm.html
 
