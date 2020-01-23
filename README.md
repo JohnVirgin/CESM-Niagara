@@ -83,7 +83,7 @@ Specifies the resolution of the components being used in your build. What goes i
 --compset
 ```
 
-Specifies the components going into your build. This option is actually typically used as a shortcut. Compsets that are more common have 'short names' that'll save you from typing out which specific CAM, CLM, POP, etc models you'd like to include here. You can find a list of supported CESM2 compsets here: http://www.cesm.ucar.edu/models/cesm2/cesm/compsets.html. One of the caveats of using CESM2 is that there isn't actually that many scientifically validated compsets that exist yet. The lack of testing can sometimes result in linux throwing you an error, because it won't allow you to create a case that hasn't been validated. Get around this by adding ```--run-unsupported``` to the end of the line.
+Specifies the components going into your build. This option is actually typically used as a shortcut. Compsets that are more common have 'short names' that'll save you from typing out which specific CAM, CLM, POP, etc models you'd like to include here. You can find a list of supported CESM2 compsets here: http://www.cesm.ucar.edu/models/cesm2/cesm/compsets.html. One of the caveats of using CESM2 is that there isn't actually that many scientifically validated compsets that exist yet. The lack of testing can sometimes result in an error, because it won't allow you to create a case that hasn't been validated. Get around this by adding ```--run-unsupported``` to the end of the line.
 
 ```
 --machine
@@ -98,8 +98,11 @@ Here's a quick example of a test case I setup and ran:
 ```
 The nomenclature I used for the case directory name follows the accepted conventions from NCAR's website: http://www.cesm.ucar.edu/models/cesm1.0/casename_conventions_cesm.html
 
+### Pre Case Setup
+Prior to setting up your case after its creation, you'll want to make any load balancing (modifying node and CPU allocations to individual model componenets) changes, or any changes to the model source code. Modification of nodes and CPU allocation to individual model components is done within ```env_mach_pes.xml``` file. Additionally, making modifications to the individual CESM components is done in the ```SoureMods/``` directory. 
+
 ### Setup the new case
-Head on into the case directory you just made and take a look at all the goodies in there. The next step (if you want) is to setup your case. Execute this option to set up your run directory (which should be in your $SCRATCH). It will also give you a bunch of user-changeable namelist files, where you can specify the modified and new variables that you want the model to output. There's a single namelist file for each model component, and they have naming syntax like ```user_nl_xxx```. Where the `xxx` is replaced with a given model. Lastly, this command also creates hidden files that specify batch information for SLURM. I typically run ```./case.setup``` immediately after I create a new case. You can make your changes to the .xml files we're about to talk about either before or after you run the command.
+Head on into the case directory you just made and take a look at all the goodies in there. The next step (if you want) is to setup your case. Execute this option to set up your run directory (which should be in your $SCRATCH). It will also give you a bunch of user-changeable namelist files, where you can specify the modified and new variables that you want the model to output. There's a single namelist file for each model component, and they have naming syntax like ```user_nl_xxx```. Where the `xxx` is replaced with a given model. Lastly, this command also creates hidden files that specify batch information for SLURM You can make your changes to the .xml files we're about to talk about either before or after you run the case setup.
 
 ### Build the new case
 A lot of case-specific changes will be made just before you build your case:
