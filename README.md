@@ -126,7 +126,6 @@ time to run  ```./case.build``` !
 
 This will take a little while to compile the model. You can see the time elapse for each component as it builds.
 
-
 ### Submitting the new case
 Once you're ready to submit, you can execute the ```./case.submit``` command, for which it'll give you all the SLURM batch specifics. I'm fairly certain that this executable file is just a wrapper for the hidden file ```.case.run```, which is the actual shell script that submits via slurm. If you want to make changes to the number of nodes you're using or the number of tasks per node, you can do it in here.
 

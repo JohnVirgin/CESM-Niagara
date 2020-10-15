@@ -498,7 +498,7 @@ using a fortran linker.
 <compiler MACH="niagara" COMPILER="intel">
   <SLIBS>
     <append MPILIB="intelmpi"> -mkl=cluster </append>
-    <append> -L/scinet/niagara/software/2018a/opt/intel-2018.2-intelmpi-2018.2/netcdf-mpi/4.6.1/lib -lnetcdf -lnetcdff </append>
+    <append> -L/scinet/niagara/software/2018a/opt/intel-2018.3-intelmpi-2018.3/netcdf-mpi/4.6.1/lib -lnetcdf -lnetcdff </append>
   </SLIBS>
 </compiler>
 
