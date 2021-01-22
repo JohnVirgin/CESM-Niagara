@@ -26,16 +26,16 @@ cd cesm
 ./manage_externals/checkout_externals
 ```
 
-Now You've got a full copy of the model (minus the input data). All that's left is to access the Niagara specific .xml files in this repo and replace the ones sitting in your ```cesm2_1_0``` directory.
+Now You've got a full copy of the model (minus the input data). All that's left is to access the Niagara specific .xml files in this repo and replace the ones sitting in your cesm_sandbox directory. I'd reccomend renaming your directory into whicher CESM2 version you're using (e.g. ```cesm2_1_3```)
 
 ```
-git clone https://github.com/JohnVirgin/CESM-Builds/Niagara/cesm2_1_0_xml
+git clone https://github.com/JohnVirgin/CESM-Builds/Niagara/cesm2_1_3_xml
 ```
 
-These three .xml files- config_compilers, config_machines, and config_batch- configure CESM's compilers, hardware specifics, and SLURM batch submission system specifically for Niagara. Three files of the same names should be sitting in:
+These three .xml files- config_compilers, config_machines, and config_batch- set CESM's compilers, software specifics, and the LURM batch submission system specifically for Niagara. Three files of the same names should be sitting in:
 
 ```
-~/cesm2_1_0/cime/config/cesm/machines
+$HOME/cesm2_1_3/cime/config/cesm/machines
 ```
 
 Replace those default files with the ones from this repo, and you should be ready to go.
@@ -52,7 +52,7 @@ Running the model consists of four mandatory steps, with an number of options in
 
 ### Creating a new case
 
-```cd``` into ```cesm2_1_0/cime/scripts/``` and you'll see an executable file, ```create_newcase```. Execute this with some parameters to initiate a particular CESM experiment. A few mandatory options:
+```cd``` into ```cesm2_1_3/cime/scripts/``` and you'll see an executable file, ```create_newcase```. Execute this with some parameters to initiate a particular CESM experiment. A few mandatory options:
 
 ```
 --case

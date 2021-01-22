@@ -1,0 +1,107 @@
+<?xml version="1.0"?>
+
+<!--
+
+===============================================================
+COMPILER and COMPILERS
+===============================================================
+If a machine supports multiple compilers - then
+- the settings for COMPILERS should reflect the supported compilers
+as a comma separated string
+- the setting for COMPILER should be the default compiler
+(which is one of the values in COMPILERS)
+
+===============================================================
+MPILIB and MPILIBS
+===============================================================
+If a machine supports only one MPILIB is supported - then
+the setting for  MPILIB and MPILIBS should be blank ("")
+If a machine supports multiple mpi libraries (e.g. mpich and openmpi)
+- the settings for MPILIBS should reflect the supported mpi libraries
+as a comma separated string
+
+The default settings for COMPILERS and MPILIBS is blank (in config_machines.xml)
+
+Normally variable substitutions are not made until the case scripts are run, however variables
+of the form $ENV{VARIABLE_NAME} are substituted in create_newcase from the environment
+variable of the same name if it exists.
+
+===============================================================
+PROJECT_REQUIRED
+===============================================================
+A machine may need the PROJECT xml variable to be defined either because it is
+used in some paths, or because it is used to give an account number in the job
+submission script. If either of these are the case, then PROJECT_REQUIRED
+should be set to TRUE for the given machine.
+
+
+mpirun: the mpirun command that will be used to actually launch the model.
+The attributes used to choose the mpirun command are:
+
+mpilib: can either be 'default' the name of an mpi library, or a compiler name so one can choose the mpirun
+based on the mpi library in use.
+
+the 'executable' tag must have arguments required for the chosen mpirun, as well as the executable name.
+
+unit_testing: can be 'true' or 'false'.
+This allows using a different mpirun command to launch unit tests
+
+-->
+
+<config_machines version="2.0">
+  <machine MACH="niagara">
+    <DESC>COMPUTE CANADA (SCINET) platform, os is linux, 40 pes/node, batch system is SLURM</DESC>
+    <OS>LINUX</OS>
+    <COMPILERS>intel</COMPILERS>
+    <MPILIBS>openmpi</MPILIBS>
+    <CIME_OUTPUT_ROOT>$ENV{SCRATCH}/cesm2_1_0/runs/</CIME_OUTPUT_ROOT>
+    <DIN_LOC_ROOT>/scratch/c/cgf/jgvirgin/cesm2_1_0/inputdata</DIN_LOC_ROOT>
+    <DIN_LOC_ROOT_CLMFORC>/scratch/c/cgf/jgvirgin/cesm2_1_0/inputdata/atm/datm7/</DIN_LOC_ROOT_CLMFORC>
+    <DOUT_S_ROOT>$ENV{SCRATCH}/cesm2_1_0/archive/$CASE</DOUT_S_ROOT>
+    <BASELINE_ROOT>$ENV{SCRATCH}/cesm2_1_0/cesm_baselines</BASELINE_ROOT>
+    <CCSM_CPRNC>$ENV{SCRATCH}/cesm2_1_0/ccsm_cprnc</CCSM_CPRNC>
+    <GMAKE>gmake</GMAKE>
+    <GMAKE_J>40</GMAKE_J>
+    <BATCH_SYSTEM>slurm</BATCH_SYSTEM>
+    <SUPPORTED_BY>jgvirgin@uwaterloo.ca</SUPPORTED_BY>
+    <MAX_TASKS_PER_NODE>80</MAX_TASKS_PER_NODE>
+    <MAX_MPITASKS_PER_NODE>80</MAX_MPITASKS_PER_NODE>
+    <PROJECT_REQUIRED>FALSE</PROJECT_REQUIRED>
+    <mpirun mpilib="openmpi">
+      <executable>mpirun</executable>
+      <arguments>
+        <arg name="anum_tasks"> -np {{ total_tasks }}</arg>
+        <arg name="use-hwthread-cpus"> --use-hwthread-cpus</arg>
+      </arguments>
+    </mpirun>
+
+    <module_system type="module">
+      <init_path lang="perl">/scinet/niagara/software/2018a/lmod/lmod/init/perl</init_path>
+      <init_path lang="python">/scinet/niagara/software/2018a/lmod/lmod/init/env_modules_python.py</init_path>
+      <init_path lang="csh">/scinet/niagara/software/2018a/lmod/lmod/init/csh</init_path>
+      <init_path lang="sh">/scinet/niagara/software/2018a/lmod/lmod/init/sh</init_path>
+      <cmd_path lang="perl">/scinet/niagara/software/2018a/lmod/lmod/libexec/lmod perl</cmd_path>
+      <cmd_path lang="python">/scinet/niagara/software/2018a/lmod/lmod/libexec/lmod python</cmd_path>
+      <cmd_path lang="sh">module</cmd_path>
+      <cmd_path lang="csh">module</cmd_path>
+      <modules>
+        <command name="load">NiaEnv/2018a</command>
+        <command name="load">perl/5.20.3</command>
+        <command name="load">cmake/3.10.3</command>
+        <command name="load">git/2.16.3</command>
+        <command name="load">subversion/1.9.7</command>
+        <command name="load">intel/2018.3</command>
+        <command name="load">hdf5/1.8.20</command>
+        <command name="load">netcdf/4.6.1</command>
+        <command name="load">openmpi/3.1.1</command>
+        <command name="load">pnetcdf/1.9.0</command>
+      </modules>
+    </module_system>
+    <environment_variables>
+      <env name="OMP_STACKSIZE">512M</env>
+    </environment_variables>
+    <resource_limits>
+      <resource name="RLIMIT_STACK">-1</resource>
+    </resource_limits>
+  </machine>
+</config_machines>
