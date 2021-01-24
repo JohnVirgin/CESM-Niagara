@@ -30,7 +30,7 @@ These three .xml files- ```config_compilers.xml```, ```config_machines.xml```, a
 $HOME/cesm2_1_3/cime/config/cesm/machines
 ```
 
-Replace those default files with the ones from this repository. You'll need to make some modifications to ```config_batch.xml``` that specify user specific SLURM batch directives. You're account allocation needs to be changed accordingly, and your mail-user email address does as well, otherwise every subnmitted CESM job will send it's updates to my email.
+Replace those default files with the ones from this repository. You'll need to make some modifications to ```config_batch.xml``` that specify user specific SLURM batch directives. You're account allocation needs to be changed accordingly, and your mail-user email address does as well, otherwise every submitted CESM job will send its updates to my email.
 
 Lastly, with regards to software modules loaded in (see ```config_machines.xml```), the current modules loaded for running CESM are sourced from Niagara's 2018a default software stack (```NiaEnv/2018a```). This software stack is outdated, and when loaded will echo a statement to reflect that the current default stack, which was preloaded when you sign in, has been swapped out. This print statement will causes errors during the CESM configuration process. To get around this, you need to modify your ```.modulesrc``` file in your ```$HOME``` to automatically swap out the current software stack for ```NiaEnv/2018a```. Open up that file and add:
 
@@ -38,7 +38,7 @@ Lastly, with regards to software modules loaded in (see ```config_machines.xml``
 module-version NiaEnv/2018a default
 ```
 
-This should prevent issues when CESM needs to be built, setup, and ran.
+This should prevent issues when CESM needs to be built, setup, and ran. It will also remove any issues with running CESM when Scinet decides to change the default software stack.
 
 # Running the Model (Quickstart version)
 Running the model consists of four mandatory steps, with an number of options in between to modify a given case with your own desired specifications. Steps as follows are:
