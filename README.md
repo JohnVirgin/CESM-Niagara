@@ -4,41 +4,41 @@
 # Source Code and Picking a Particular Version
 I'm just going to be discussing running/modifying the model version that's already sitting in my home directory, as it's been modified accordingly for Niagara specifically.
 
-### Pre-configured version from my home directory (CESM2.1.0)
-Log into scinet and ```cd``` over to my home directory:
-
-```
-cd /home/c/cgf/jgvirgin
-```
-You should see a directory labelled ```cesm2_1_0```, which is the version of CESM2 that's configured for use on Niagara. Copy that directory over to your home directory. If you don't have permissions, see the alternative below
-
 ### Getting the Source code from NCAR and the Niagara specific configuration files from this github
-If permissions aren't allowing you to access the ```cesm2_1_0``` directory from my home folder, you can download the model source code from NCAR directly:
+Download the model source code from NCAR directly:
 
 ```
-git clone -b release-cesm2.1.0 https://github.com/ESCOMP/cesm.git
+git clone -b release-cesm2.1.3 https://github.com/ESCOMP/cesm.git
 ```
 
-move into the ```cesm``` folder that was just downloaded and run the checkout externals command to get the component specific source code (land, atmosphere, sea ice, ocean, etc). Make sure subversion is loaded before checkout (```module load subversion```)
+move into the ```cesm_sandbox``` folder that was just downloaded and run the checkout externals command to get the component specific source code (land, atmosphere, sea ice, ocean, etc). Make sure subversion is loaded before checkout (```module load subversion```)
 
 ```
-cd cesm
+cd cesm_sandbox
 ./manage_externals/checkout_externals
 ```
 
-Now You've got a full copy of the model (minus the input data). All that's left is to access the Niagara specific .xml files in this repo and replace the ones sitting in your cesm_sandbox directory. I'd reccomend renaming your directory into whicher CESM2 version you're using (e.g. ```cesm2_1_3```)
+Now You've got a full copy of the model (minus the input data). All that's left is to access the Niagara specific .xml files in this repository and replace the ones sitting in your cesm_sandbox directory. I'd reccomend renaming your directory into whichever CESM2 version you're using (e.g. ```cesm2_1_3```)
 
 ```
 git clone https://github.com/JohnVirgin/CESM-Builds/Niagara/cesm2_1_3_xml
 ```
 
-These three .xml files- config_compilers, config_machines, and config_batch- set CESM's compilers, software specifics, and the LURM batch submission system specifically for Niagara. Three files of the same names should be sitting in:
+These three .xml files- ```config_compilers.xml```, ```config_machines.xml```, and ```config_batch.xml```- set CESM's compilers, software modules, and the SLURM batch submission system specifically for Niagara. Three files of the same names should be sitting in:
 
 ```
 $HOME/cesm2_1_3/cime/config/cesm/machines
 ```
 
-Replace those default files with the ones from this repo, and you should be ready to go.
+Replace those default files with the ones from this repository. You'll need to make some modifications to ```config_batch.xml``` that specify user specific SLURM batch directives. You're account allocation needs to be changed accordingly, and your mail-user email address does as well, otherwise every subnmitted CESM job will send it's updates to my email.
+
+Lastly, with regards to software modules loaded in (see ```config_machines.xml```), the current modules loaded for running CESM are sourced from Niagara's 2018a default software stack (```NiaEnv/2018a```). This software stack is outdated, and when loaded will echo a statement to reflect that the current default stack, which was preloaded when you sign in, has been swapped out. This print statement will causes errors during the CESM configuration process. To get around this, you need to modify your ```.modulesrc``` file in your ```$HOME``` to automatically swap out the current software stack for ```NiaEnv/2018a```. Open up that file and add:
+
+```
+module-version NiaEnv/2018a default
+```
+
+This should prevent issues when CESM needs to be built, setup, and ran.
 
 # Running the Model (Quickstart version)
 Running the model consists of four mandatory steps, with an number of options in between to modify a given case with your own desired specifications. Steps as follows are:
