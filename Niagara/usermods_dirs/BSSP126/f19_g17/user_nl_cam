@@ -1,0 +1,8 @@
+! Users should add all user specific namelist changes below in the form of 
+! namelist_var = new_namelist_value 
+
+aircraft_co2_file = '/scratch/c/cgf/jgvirgin/cesm2_1_3/inputdata/atm/cam/ggas/emissions-cmip6_CO2_anthro_ac_ScenarioMIP_IAMC-IMAGE-ssp126_201401-210112_fv_0.9x1.25_c20190207.nc'
+
+co2flux_fuel_file = '/scratch/c/cgf/jgvirgin/cesm2_1_3/inputdata/atm/cam/ggas/emissions-cmip6_CO2_anthro_surface_ScenarioMIP_IAMC-IMAGE-ssp126_201401-210112_fv_0.9x1.25_c20190207.nc'
+
+aircraft_specifier             = 'ac_CO2 -> emissions-cmip6_CO2_anthro_ac_ssp126_201401-210112_fv_0.9x1.25_c20190207.txt' 

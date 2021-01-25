@@ -52,13 +52,13 @@ Running the model consists of four mandatory steps, with an number of options in
 
 ### Creating a new case
 
-```cd``` into ```cesm2_1_3/cime/scripts/``` and you'll see an executable file, ```create_newcase```. Execute this with some parameters to initiate a particular CESM experiment. A few mandatory options:
+```cd``` into ```cesm2_1_3/cime/scripts/``` and you'll see an executable file, ```create_newcase```. Execute this with some arguments to initiate a particular CESM experiment. A few mandatory ones are:
 
 ```
 --case
 ```
 
-Specific location of where your case will be created. I have two folders for this, one in my home directory and one in my scratch directory. Regardless of where you put it, the .xml files we're using are configured to automatically file all compiling, archiving, and setup output into your scratch directory. I suggest putting newly created cases in your scratch directory for now, because submitted batch jobs using SLURM refuse to write into your home directory (home directory is read only). You might get some issues if a log file is created during your run and it happens to be sitting in your ```$HOME```.
+Specific location of where your case will be created. I have two folders for this, one in my home directory and one in my scratch directory. Regardless of where you put it, the .xml files we're using are configured to automatically file all compiling, archiving, and setup output into your scratch directory. I suggest putting newly created cases in your scratch directory for now, because submitted batch jobs using SLURM refuse to write into your home directory (home directory is read only from the persepctive of a compute node). You might get some issues if a log file is created during your run and it happens to be sitting in your ```$HOME```.
 
 Do all your building, compiling, running, and everything else out of scratch. When you're all finished, move the case directory you made back to your home to prevent it from being deleted due to inactivity.
 
@@ -66,7 +66,13 @@ Do all your building, compiling, running, and everything else out of scratch. Wh
 --res
 ```
 
-Specifies the resolution of the components being used in your build. What goes into this command depends on what component set you're picking. You can find a list of supported grids for CESM here: http://www.cesm.ucar.edu/models/cesm2/config/compsets.html.
+Specifies the resolution of the components being used in your build. What goes into this command depends on what component set you're picking. You can find a list of supported grids for CESM here: http://www.cesm.ucar.edu/models/cesm2/config/compsets.html. You can also use the  ```query_config``` tool in the same directory to view all grids available:
+
+```
+./query_config --grids
+```
+
+This tool can also be used to query available 'out of the box' component sets. Just change the grid arguement to compset.
 
 ```
 --compset
@@ -75,15 +81,22 @@ Specifies the resolution of the components being used in your build. What goes i
 Specifies the components going into your build. This option is actually typically used as a shortcut. Compsets that are more common have 'short names' that'll save you from typing out which specific CAM, CLM, POP, etc models you'd like to include here. You can find a list of supported CESM2 compsets here: http://www.cesm.ucar.edu/models/cesm2/cesm/compsets.html. Some component sets haven't been scientifically validated by NCAR yet; get around this by adding ```--run-unsupported``` to the end of the line.
 
 ```
---machine
+--mach
 ```
 
 Specifies the machine you're running on so CESM knows where to get its modules, compilers, and figure out what batch system we're working with. For us, this is always ```niagara```.
 
+```
+--user-mods-dir
+```
+
+Some presets for specific experiments (i.e. compsets) have issues with available input data. An Example: The B-compset (fully coupled) historical experiment (BHIST) with a 2 degree atmosphere grid specifies a nitrogen deposition .nc file for use with CLM that will break the model at runtime. To get around this, you have to modify the list of input data files your experiment will use. Most of the time this is done during the setup process, but you can also create a user modification directory that is filled with specific changes for a given compset to expidite the process. During the case creation, specify this 'user-mods' directory with the command above and it'll pull all the files from it and add them to your ```$CASEROOT```. I've taken the liberty of creating user modifications for a few compsets and added the files here. By default, the usermods-dir with CESM2 is located in ```$HOME/cesm2_1_3/cime_config/```.
+
+
 Here's a quick example of a test case I setup and ran:
 
 ```
-./create_newcase --case $SCRATCH/CESM_Cases/b.e21.B1850.f19_g17.JGV.TestCase.1 --res f19_g17 --compset B1850 --machine niagara
+./create_newcase --case $SCRATCH/CESM_Cases/b.e21.B1850.f19_g17.JGV.TestCase.1 --res f19_g17 --compset B1850 --mach niagara
 ```
 The nomenclature I used for the case directory name follows the accepted conventions from NCAR's website: http://www.cesm.ucar.edu/models/cesm1.0/casename_conventions_cesm.html
 
@@ -91,7 +104,7 @@ The nomenclature I used for the case directory name follows the accepted convent
 Prior to setting up your case after its creation, you'll want to make any load balancing (modifying node and CPU allocations to individual model componenets) changes, or any changes to the model source code. Modification of nodes and CPU allocation to individual model components is done within ```env_mach_pes.xml``` file. Additionally, making modifications to the individual CESM components is done in the ```SourceMods/``` directory. 
 
 ### Setup the new case
-Head on into the case directory you just made and take a look at all the newly created files. The next step is to setup your case. Execute this option to set up your run directory (which should be in your ```$SCRATCH```). It will also give you a bunch of user-changeable namelist files, where you can specify the modified and new variables that you want the model to output. There's a single namelist file for each model component, and they have naming syntax like ```user_nl_xxx```. Where the `xxx` is replaced with a given model. Lastly, this command also creates hidden files that specify batch information for SLURM You can make your changes to the .xml files we're about to talk about either before or after you run the case setup.
+Head on into the case directory you just made and take a look at all the newly created files. The next step is to setup your case. Execute this option to set up your run directory (which should be in your ```$SCRATCH```). It will also give you a bunch of user-changeable namelist files, where you can specify the modified and new variables that you want the model to output. There's a single namelist file for each model component, and they have naming syntax like ```user_nl_xxx```. Where the `xxx` is replaced with a given model. Lastly, this command also creates hidden files that specify batch information for SLURM You can make your changes to the .xml files we're about to talk about either before or after you run the case setup. If you've specified a user modification during the case creation, the ```user_nl_xxx``` files will already exist in your ```$CASEROOT```.
 
 ### Build the new case
 A lot of case-specific changes will be made just before you build your case:
@@ -101,7 +114,7 @@ A lot of case-specific changes will be made just before you build your case:
 - [ ] Changes to run length and run history time-steps.
 - [ ] Changes to physics, chemistry, and parameterization schemes.
 
-I won't dive into a lot of these right now, but a few important things to note:
+A few important things to note:
 - A lot of the batch submission, run length, and run options are configured in the .xml files that are sitting in your case directory. Now, you can go into each one and manually change things. But NCAR advises against that because the chance of error goes up. Their work around is to include to executable files to make your life easier- ```./xmlchange``` and ```./xmlquery```.
 - You can ```./xmlquery``` a variable in ANY .xml file in the directory, and it'll return its value/string.
 - You can ```./xmlchange``` any of these variables by specifying the name and what you're changing it to.
@@ -124,14 +137,12 @@ There's many more; open the the ```env``` files to get a full look. One other th
 
 time to run  ```./case.build``` !
 
-This will take a little while to compile the model. You can see the time elapse for each component as it builds.
+This not only compiles the model, but generates namelists and places them in the ```Buildconf``` directory, and then checks to see if the necessary input data is available. You can do both of these tasks separately if you like to ensure you have the data you need beforehand (since building takes a while). Use ```./preview_namelists``` to generate namelists and ```user_nl_xxx``` files, and use ```./check_input_data --download``` to download any missing data.
 
 ### Submitting the new case
-Once you're ready to submit, you can execute the ```./case.submit``` command, for which it'll give you all the SLURM batch specifics. I'm fairly certain that this executable file is just a wrapper for the hidden file ```.case.run```, which is the actual shell script that submits via slurm. If you want to make changes to the number of nodes you're using or the number of tasks per node, you can do it in here.
+Once you're ready to submit, you can execute the ```./case.submit``` command, for which it'll give you all the SLURM batch specifics. This executable file is just a wrapper for the hidden file ```.case.run```, which is the actual shell script that submits via slurm. Note that, while you could open the .run file and make changes to slurm directives, it's not advised to make changes to the number of nodes or tasks, as these would then conflict with the node distribution for each model component specified in ```env_mach_pes.xml```, which is generated during the case creation. If you want to modify the processor allocation, do so before ```./case.setup```.
 
-IMPORTANT NOTE: The other important thing ```./case.submit``` does is checks to see if you have the necessary input data to run your case (forcings, initial conditions, etc.). You'll see it check for this when you run ```./case.submit```, and if you don't have it, it'll download the necessary data from NCAR.
+# Input Data
+The full input dataset for CESM2 is over 20 Terabytes in size. As a result of this size, individual cases you create will only download what's necessary to successfully run the simulation. Moreover, the ```config_machines.xml``` file from here specifies the location of all input data. In order to preserve space, I've hardcoded my specific ```$SCRATCH``` directory (```/scratch/c/cgf/jgvirgin/cesm2_1_3/inputdata/```) to avoid duplicates of data downloading.
 
-In the ```config_machines.xml``` file, the input data directory is hard coded to my $SCRATCH (```/scratch/c/cgf/jgvirgin/cesm2_1_0/inputdata/```). I did this so we wouldn't all be downloading input data for similar cases. This makes no difference for when you try to run cases (or at least it shouldn't, but I still need to check permissions), but at least you know where the input data is being downloaded to.
-
-# Adding Output Variables and Changing the Archive Files
-To be updated in the future
+# Namelist Modifications

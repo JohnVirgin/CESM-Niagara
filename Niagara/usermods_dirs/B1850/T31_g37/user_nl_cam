@@ -1,0 +1,4 @@
+! Users should add all user specific namelist changes below in the form of 
+! namelist_var = new_namelist_value 
+
+ncdata = '/scratch/c/cgf/jgvirgin/cesm2_1_3/inputdata/atm/cam/inic/gaus/cami_0000-01-01_48x96_L26_c091218.nc' 
