@@ -90,7 +90,7 @@ Specifies the machine you're running on so CESM knows where to get its modules, 
 --user-mods-dir
 ```
 
-Some presets for specific experiments (i.e. compsets) have issues with available input data. An Example: The B-compset (fully coupled) historical experiment (BHIST) with a 2 degree atmosphere grid specifies a nitrogen deposition .nc file for use with CLM that will break the model at runtime. To get around this, you have to modify the list of input data files your experiment will use. Most of the time this is done during the setup process, but you can also create a user modification directory that is filled with specific changes for a given compset to expidite the process. During the case creation, specify this 'user-mods' directory with the command above and it'll pull all the files from it and add them to your ```$CASEROOT```. I've taken the liberty of creating user modifications for a few compsets and added the files here. By default, the usermods-dir with CESM2 is located in ```$HOME/cesm2_1_3/cime_config/```.
+Some presets for specific experiments (i.e. compsets) have issues with available input data. An Example: The B-compset (fully coupled) historical experiment (BHIST) with a 2 degree atmosphere grid specifies a nitrogen deposition .nc file for use with CLM that will break the model at runtime. To get around this, you have to modify the list of input data files your experiment will use. Most of the time this is done during the setup process, but you can also create a user modification directory that is filled with specific changes for a given compset to expedite the process. During the case creation, specify this 'user-mods' directory with the command above and it'll pull all the files from it and add them to your ```$CASEROOT```. I've taken the liberty of creating user modifications for a few compsets and added the files here. By default, the usermods-dir with CESM2 is located in ```$HOME/cesm2_1_3/cime_config/```.
 
 
 Here's a quick example of a test case I setup and ran:
@@ -146,3 +146,4 @@ Once you're ready to submit, you can execute the ```./case.submit``` command, fo
 The full input dataset for CESM2 is over 20 Terabytes in size. As a result of this size, individual cases you create will only download what's necessary to successfully run the simulation. Moreover, the ```config_machines.xml``` file from here specifies the location of all input data. In order to preserve space, I've hardcoded my specific ```$SCRATCH``` directory (```/scratch/c/cgf/jgvirgin/cesm2_1_3/inputdata/```) to avoid duplicates of data downloading.
 
 # Namelist Modifications
+To be updated.
