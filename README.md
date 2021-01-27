@@ -1,5 +1,5 @@
 # CESM-Builds
- Source Code and Use Instructions for CESM on Scinet's Niagara
+ Source Code and Use Instructions for CESM on Scinet's Niagara. The files include options for porting both major release versions of CESM (1 and 2), but the information below only documents porting and setting up CESM2. Information regarding CESM1.2.2 will be updated in the future
 
 # Source Code and Picking a Particular Version
 I'm just going to be discussing running/modifying the model version that's already sitting in my home directory, as it's been modified accordingly for Niagara specifically.
