@@ -82,7 +82,6 @@ for mct, etc.
   <SUPPORTS_CXX>FALSE</SUPPORTS_CXX>
 </compiler>
 
-
 <compiler COMPILER="intel">
   <!-- http://software.intel.com/en-us/articles/intel-composer-xe/ -->
   <ADD_CPPDEFS> -DFORTRANUNDERSCORE -DNO_R16</ADD_CPPDEFS>
@@ -110,13 +109,9 @@ for mct, etc.
 
 <compiler COMPILER="intel" MACH="niagara">
   <MPI_PATH>/scinet/niagara/software/2018a/opt/intel-2018.3/openmpi/3.1.1</MPI_PATH>
-  <NETCDF_PATH>/scinet/niagara/software/2018a/opt/intel-2018.3/netcdf/4.6.1</NETCDF_PATH>
+  <NETCDF_PATH>/scinet/niagara/software/2018a/opt/intel-2018.3-openmpi-3.1.1/netcdf-mpi/4.6.1</NETCDF_PATH>
   <PNETCDF_PATH>/scinet/niagara/software/2018a/opt/intel-2018.3-openmpi-3.1.1/pnetcdf/1.9.0</PNETCDF_PATH>
   <ADD_SLIBS> -L/$ENV{NETCDF_PATH}/lib -lnetcdf -lnetcdff</ADD_SLIBS>
-</compiler>
-
-<compiler>
-  <ADD_CPPDEFS MODEL="pop2"> -D_USE_FLOW_CONTROL </ADD_CPPDEFS>
 </compiler>
 
 </config_compilers>

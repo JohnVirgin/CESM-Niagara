@@ -1,8 +1,8 @@
 # CESM-Builds
- Source Code and Use Instructions for CESM on Scinet's Niagara. The files include options for porting both major release versions of CESM (1 and 2), but the information below only documents porting and setting up CESM2. Information regarding CESM1.2.2 will be updated in the future
+ Source Code and Use Instructions for CESM on Scinet's Niagara. The files include options for porting both major release versions of CESM (1 and 2), but the information below only documents porting and setting up CESM2. Information regarding CESM1.2.2 & CESM1.0.4 will be updated in the future.
 
 # Source Code and Picking a Particular Version
-I'm just going to be discussing running/modifying the model version that's already sitting in my home directory, as it's been modified accordingly for Niagara specifically.
+All three versions are sitting in my home directory, but download/porting methods are quite different for CESM2 as opposed to CESM1. Information below only pertains to CESM2.
 
 ### Getting the Source code from NCAR and the Niagara specific configuration files from this github
 Download the model source code from NCAR directly:
@@ -21,7 +21,7 @@ cd cesm_sandbox
 Now You've got a full copy of the model (minus the input data). All that's left is to access the Niagara specific .xml files in this repository and replace the ones sitting in your cesm_sandbox directory. I'd reccomend renaming your directory into whichever CESM2 version you're using (e.g. ```cesm2_1_3```)
 
 ```
-git clone https://github.com/JohnVirgin/CESM-Builds/Niagara/cesm2_1_3_xml
+git clone https://github.com/JohnVirgin/CESM-Builds/Niagara/cesm2_1_3
 ```
 
 These three .xml files- ```config_compilers.xml```, ```config_machines.xml```, and ```config_batch.xml```- set CESM's compilers, software modules, and the SLURM batch submission system specifically for Niagara. Three files of the same names should be sitting in:

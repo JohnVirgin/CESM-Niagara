@@ -32,25 +32,25 @@
             contain other variables defined in cesm.
 
 -->
-        <machine MACH="niagara">
-                <DESC>Scinet's Niagara, ported by JGV.</DESC>           
-                <OS>LINUX</OS>                   
-                <COMPILERS>intel</COMPILERS>
-                <MPILIBS>openmpi,mpi-serial</MPILIBS>
-                <CESMSCRATCHROOT>/scratch/c/cgf/jgvirgin/cesm1_2_2/runs</CESMSCRATCHROOT>
-                <RUNDIR>/scratch/c/cgf/jgvirgin/cesm1_2_2/runs/$CASE/run</RUNDIR>
-                <EXEROOT>/scratch/c/cgf/jgvirgin/cesm1_2_2/runs/$CASE/bld</EXEROOT>
-                <DIN_LOC_ROOT>/scratch/c/cgf/jgvirgin/cesm1_2_2/inputdata</DIN_LOC_ROOT>
-                <DIN_LOC_ROOT_CLMFORC>/scratch/c/cgf/jgvirgin/cesm1_2_2/inputdata/atm/datm7</DIN_LOC_ROOT_CLMFORC>
-                <DOUT_S>TRUE</DOUT_S>                               
-                <DOUT_S_ROOT>/scratch/c/cgf/jgvirgin/cesm1_2_2/archive/$CASE</DOUT_S_ROOT>
-                <CCSM_BASELINE>/home/c/cgf/jgvirgin/cesm1_2_2/ccsm_baselines</CCSM_BASELINE>
-                <CCSM_CPRNC>/home/c/cgf/jgvirgin/cesm1_2_2/models/atm/cam/tools/cprnc</CCSM_CPRNC>
-                <BATCHQUERY>squeue</BATCHQUERY> 
-                <BATCHSUBMIT>sbatch</BATCHSUBMIT>
-                <SUPPORTED_BY>jgvirgin@uwaterloo.ca</SUPPORTED_BY>                 
-                <GMAKE_J>40</GMAKE_J>
-                <MAX_TASKS_PER_NODE>80</MAX_TASKS_PER_NODE>
-        </machine>
+<machine MACH="niagara">
+        <DESC>Scinet's Niagara, ported by JGV.</DESC>           
+        <OS>LINUX</OS>                   
+        <COMPILERS>intel</COMPILERS>
+        <MPILIBS>openmpi,mpi-serial</MPILIBS>
+        <CESMSCRATCHROOT>/scratch/c/cgf/jgvirgin/cesm1_2_2/runs</CESMSCRATCHROOT>
+        <RUNDIR>/scratch/c/cgf/jgvirgin/cesm1_2_2/runs/$CASE/run</RUNDIR>
+        <EXEROOT>/scratch/c/cgf/jgvirgin/cesm1_2_2/runs/$CASE/bld</EXEROOT>
+        <DIN_LOC_ROOT>/scratch/c/cgf/jgvirgin/cesm1_2_2/inputdata</DIN_LOC_ROOT>
+        <DIN_LOC_ROOT_CLMFORC>/scratch/c/cgf/jgvirgin/cesm1_2_2/inputdata/atm/datm7</DIN_LOC_ROOT_CLMFORC>
+        <DOUT_S>TRUE</DOUT_S>                               
+        <DOUT_S_ROOT>/scratch/c/cgf/jgvirgin/cesm1_2_2/archive/$CASE</DOUT_S_ROOT>
+        <CCSM_BASELINE>/home/c/cgf/jgvirgin/cesm1_2_2/ccsm_baselines</CCSM_BASELINE>
+        <CCSM_CPRNC>/home/c/cgf/jgvirgin/cesm1_2_2/models/atm/cam/tools/cprnc</CCSM_CPRNC>
+        <BATCHQUERY>squeue</BATCHQUERY> 
+        <BATCHSUBMIT>sbatch</BATCHSUBMIT>
+        <SUPPORTED_BY>jgvirgin@uwaterloo.ca</SUPPORTED_BY>                 
+        <GMAKE_J>40</GMAKE_J>
+        <MAX_TASKS_PER_NODE>80</MAX_TASKS_PER_NODE>
+</machine>
 
 </config_machines>

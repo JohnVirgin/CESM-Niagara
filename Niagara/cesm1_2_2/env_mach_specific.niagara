@@ -12,13 +12,19 @@ module load cmake/3.10.3
 module load git/2.16.3
 module load subversion/1.9.7
 module load intel/2018.3
-module load hdf5/1.8.20
-module load netcdf/4.6.1
 module load openmpi/3.1.1
+module load hdf5-mpi/1.10.2
+module load netcdf-mpi/4.6.1
 module load pnetcdf/1.9.0
 
+#--- set paths
+#setenv INTEL_PATH /usr/local/intel-cluster-3.2.02
+#setenv MPICH_PATH /usr/local/mpich-1.2.7p1-intel-3.2.02
+#setenv PATH ${INTEL_PATH}/fc/11.0.074/bin/intel64:${INTEL_PATH}/cc/11.0.074/bin/intel64:${MPICH_PATH}/bin:${PATH}
+#setenv LD_LIBRARY_PATH ${INTEL_PATH}/cc/11.0.074/lib/intel64:${INTEL_PATH}/fc/11.0.074/lib/intel64:${LD_LIBRARY_PATH}
+
 #--- set env variables for Macros if needed
-setenv NETCDF_PATH    /scinet/niagara/software/2018a/opt/intel-2018.3/netcdf/4.6.1
+setenv NETCDF_PATH  /scinet/niagara/software/2018a/opt/intel-2018.3-openmpi-3.1.1/netcdf-mpi/4.6.1
 setenv INC_NETCDF   \${NETCDF_PATH}/include
 setenv LIB_NETCDF   \${NETCDF_PATH}/lib
 setenv MOD_NETCDF   \${NETCDF_PATH}/include
